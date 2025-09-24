@@ -1,0 +1,100 @@
+[gd_scene load_steps=16 format=4 uid="uid://cf6nlla24haid"]
+
+[ext_resource type="PackedScene" uid="uid://b1fx40vh2fbls" path="res://Scenes/lanzadorde_eventos.tscn" id="1_hhcmx"]
+[ext_resource type="Script" uid="uid://pc8y2iylxuvr" path="res://papa.gd" id="1_xuwbe"]
+[ext_resource type="PackedScene" uid="uid://h7qbhsit3s21" path="res://Scenes/eventobase.tscn" id="2_5f032"]
+[ext_resource type="Texture2D" uid="uid://dg1e7d8kdamv8" path="res://Assets/Graphics/Ground/Dirt/dirt.png" id="3_hhcmx"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5aenr"]
+
+[sub_resource type="Gradient" id="Gradient_nypff"]
+offsets = PackedFloat32Array(0, 0.0584958, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.890196, 0.0588235, 0.0588235, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qe15x"]
+gradient = SubResource("Gradient_nypff")
+
+[sub_resource type="Gradient" id="Gradient_f5oij"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5aenr"]
+gradient = SubResource("Gradient_f5oij")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5aenr"]
+size = Vector2(69.5, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5oij"]
+size = Vector2(38.8, 5.31667)
+
+[sub_resource type="Gradient" id="Gradient_5aenr"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_orlj4"]
+gradient = SubResource("Gradient_5aenr")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5f032"]
+texture = ExtResource("3_hhcmx")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_nypff"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_5f032")
+
+[node name="MundoDelJuego" type="Node2D"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_5aenr")
+
+[node name="LanzadordeEventos" parent="." instance=ExtResource("1_hhcmx")]
+
+[node name="Temporizadoreventos2" type="Timer" parent="LanzadordeEventos"]
+wait_time = 2.0
+autostart = true
+
+[node name="Eventobase" parent="." instance=ExtResource("2_5f032")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Eventobase"]
+position = Vector2(100, 0)
+texture = SubResource("GradientTexture2D_qe15x")
+
+[node name="papa" type="CharacterBody2D" parent="."]
+script = ExtResource("1_xuwbe")
+
+[node name="GraficoPapa" type="Sprite2D" parent="papa"]
+position = Vector2(208, 352)
+scale = Vector2(1.25, 1.25)
+texture = SubResource("GradientTexture2D_5aenr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="papa"]
+position = Vector2(208, 352)
+shape = SubResource("RectangleShape2D_5aenr")
+one_way_collision = true
+
+[node name="InterfazJugador" type="CanvasLayer" parent="."]
+
+[node name="BarraEconomia" type="ProgressBar" parent="InterfazJugador"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 40.0
+value = 100.0
+
+[node name="piso" type="StaticBody2D" parent="."]
+top_level = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="piso"]
+modulate = Color(0.0509804, 0.0745098, 1, 1)
+light_mask = 2
+position = Vector2(592, 464)
+scale = Vector2(30, 30)
+shape = SubResource("RectangleShape2D_f5oij")
+debug_color = Color(0.664494, 0.503006, 0.275448, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="piso"]
+position = Vector2(576, 496)
+scale = Vector2(4.60352, 247.375)
+texture = SubResource("GradientTexture1D_orlj4")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node"]
+tile_map_data = PackedByteArray("AAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAANAAMAAAAAAAAAAAAOAAMAAAAAAAAAAAAPAAMAAAAAAAAAAAAQAAMAAAAAAAAAAAARAAMAAAAAAAAAAAATAAMAAAAAAAAAAAASAAMAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_nypff")

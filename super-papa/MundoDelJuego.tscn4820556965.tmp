@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf6nlla24haid"]
+
+[ext_resource type="Script" uid="uid://pc8y2iylxuvr" path="res://papa.gd" id="1_f5oij"]
+
+[sub_resource type="Gradient" id="Gradient_5aenr"]
+offsets = PackedFloat32Array(0, 0.837662, 0.935065, 0.961039)
+colors = PackedColorArray(0, 1, 1, 1, 0.162338, 0.162338, 0.162338, 1, 0.0649351, 0.0649351, 0.0649351, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_orlj4"]
+gradient = SubResource("Gradient_5aenr")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f5oij"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5aenr"]
+normal = Vector2(0, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5oij"]
+size = Vector2(64.85, 14.35)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="papa" type="CharacterBody2D" parent="."]
+disable_mode = 1
+script = ExtResource("1_f5oij")
+
+[node name="GraficoPapa" type="Sprite2D" parent="papa"]
+position = Vector2(-859, -181)
+scale = Vector2(0.53125, 1.90625)
+texture = SubResource("GradientTexture2D_orlj4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="papa"]
+modulate = Color(1, 0.254902, 1, 1)
+self_modulate = Color(1, 0.109804, 1, 1)
+material = SubResource("CanvasItemMaterial_f5oij")
+shape = SubResource("WorldBoundaryShape2D_5aenr")
+debug_color = Color(0.699741, 0.491524, 0.0649287, 0.42)
+
+[node name="Interfazjugador" type="CanvasLayer" parent="."]
+
+[node name="BarraEconomia" type="ProgressBar" parent="Interfazjugador"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 40.0
+value = 100.0
+
+[node name="piso" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="piso"]
+position = Vector2(0, 200)
+scale = Vector2(40, 40)
+shape = SubResource("RectangleShape2D_f5oij")
