@@ -46,7 +46,7 @@ material = SubResource("CanvasItemMaterial_5aenr")
 [node name="LanzadordeEventos" parent="." instance=ExtResource("1_hhcmx")]
 
 [node name="Temporizadoreventos2" type="Timer" parent="LanzadordeEventos"]
-wait_time = 2.0
+wait_time = 3.0
 autostart = true
 
 [node name="Eventobase" parent="." instance=ExtResource("2_5f032")]

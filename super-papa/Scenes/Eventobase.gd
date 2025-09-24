@@ -9,19 +9,14 @@ func _ready():
 	# Solo buscamos al papá. No aplicamos todavía.
 	papa = get_node("/root/MundoDelJuego/papa")
 # Creamos el Label en código
-	crear_label()
+	
 
-func crear_label():
-	# Creamos un nuevo Label
-	label_texto = Label.new()
-	
-	# Configuramos el Label
-	label_texto.text = "Evento cargando..."
-	label_texto.position = Vector2(20, 230)
-	label_texto.modulate = Color(1, 1, 1)  # Blanco
-	
-	# Añadimos el Label como hijo de este nodo
-	add_child(label_texto)
+func crear_label(texto):
+	var label = Label.new()
+	label.text = texto
+	label.position = Vector2(0, 0)
+	label.modulate = Color(1, 1, 1)  # Blanco
+	add_child(label)
 
 
 
@@ -36,21 +31,21 @@ func aplicar_efecto():
 	
 	match tipo_evento:
 		"Rifa":
-			label_texto.text = "¡Rifa del colegio! -20 Economía"
-			papa.perder_economia(20)
+			crear_label("¡Rifa del colegio! -5 Economía") 
+			papa.perder_economia(5)
 		"Termotanque":
-			label_texto.text = "¡Termotanque roto! -40 Economía"
-			papa.perder_economia(40)
+			crear_label("¡Termotanque roto! -50 Economía")
+			papa.perder_economia(50)
 		"Llamada":
-			label_texto.text= "¡Llamada perdida! -10 Relaciones"
+			crear_label("¡Llamada de la suegra! -10 Relaciones")
 			papa.perder_economia(40)
 			#papa.ganar_relaciones(-10)
 		"Pizza":
-			label_texto.text= "¡Pizza congelada! +15 Relaciones, -10 Economía"
+			crear_label("¡Pizza congelada! +15 Relaciones, +10 Economía")
 			#papa.ganar_relaciones(15)
 			papa.ganar_economia(30)
 		"Oracion":
-			label_texto.text = "¡Oración matutina! +20 Espiritualidad"
+			crear_label("¡¡Oración matutina! +20 Espiritualidad")
 			#papa.ganar_espiritualidad(20)
 			papa.perder_economia(5)
 	
